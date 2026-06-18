@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Регистрация</div>
+    <h1 class="page-hero__title">Регистрация</h1>
+    <p class="page-hero__sub">Создайте аккаунт, чтобы сохранять избранное и общаться с менеджером</p>
+  </div>
+</div>
+
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card">
+      <div class="form-msg form-msg--err" id="authError" style="display:none"></div>
+      <form class="modal__form" id="registerForm">
+        <div class="form__group">
+          <label class="form__label">Имя</label>
+          <input type="text" class="form__input" id="registerName" placeholder="Иван Иванов"/>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Телефон</label>
+          <input type="tel" class="form__input phone-mask" id="registerPhone" placeholder="+7 (___) ___-__-__"/>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Email *</label>
+          <input type="email" class="form__input" id="registerEmail" placeholder="you@example.com" required/>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label class="form__label">Пароль *</label>
+            <input type="password" class="form__input" id="registerPassword" placeholder="••••••••" required minlength="6"/>
+          </div>
+          <div class="form__group">
+            <label class="form__label">Повтор пароля *</label>
+            <input type="password" class="form__input" id="registerPassword2" placeholder="••••••••" required minlength="6"/>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--accent btn--full">Зарегистрироваться</button>
+      </form>
+      <p class="auth-card__alt">Уже есть аккаунт? <a href="/login">Войти</a></p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

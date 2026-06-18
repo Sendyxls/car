@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}О компании — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / О компании</div>
+    <h1 class="page-hero__title">О компании</h1>
+    <p class="page-hero__sub">{{ cms('about_sub', 'Более 5 лет помогаем находить идеальный автомобиль') }}</p>
+  </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="about-stats">
+  <div class="container">
+    <div class="about-stats__grid">
+      <div class="stat-card">
+        <div class="stat-card__num accent">200+</div>
+        <div class="stat-card__label">автомобилей в наличии</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num accent">5 лет</div>
+        <div class="stat-card__label">на рынке</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num accent">1 200+</div>
+        <div class="stat-card__label">успешных продаж</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num accent">9</div>
+        <div class="stat-card__label">марок из Китая</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__num accent">98%</div>
+        <div class="stat-card__label">довольных клиентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT TEXT ===== -->
+<section class="about-text-section">
+  <div class="container about-text-section__inner">
+    <div class="about-text-section__content">
+      <h2 class="section-title">История компании</h2>
+      <p>{{ cms('about_history_1', 'Автосалон <strong>АВТОМИР</strong> основан в 2019 году командой профессионалов автомобильного рынка. Мы начинали с небольшого шоурума в 10 автомобилей — сегодня наш парк насчитывает более 200 проверенных автомобилей с пробегом.') | safe }}</p>
+      <p>{{ cms('about_history_2', 'За пять лет мы выстроили прозрачный процесс продаж, при котором клиент всегда знает полную историю автомобиля ещё до подписания договора. Каждое авто проходит 150-точечную диагностику в нашем техническом центре.') | safe }}</p>
+      <p>{{ cms('about_history_3', 'Мы напрямую работаем с поставщиками автомобилей из Китая — все таможенные платежи уже включены в цену на сайте, без скрытых доплат. Программа trade-in позволяет быстро обменять ваш автомобиль на более новый.') | safe }}</p>
+    </div>
+    <div class="about-text-section__img">
+      <img src="https://images.unsplash.com/photo-1567818735868-e71b99932e29?w=600&q=80" alt="Автосалон АВТОМИР"/>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADVANTAGES ===== -->
+<section class="advantages-section">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center">Почему выбирают нас</h2>
+    <div class="advantages-grid">
+      <div class="adv-card">
+        <div class="adv-card__icon">🔍</div>
+        <h3 class="adv-card__title">Юридическая чистота</h3>
+        <p class="adv-card__text">Проверка каждого автомобиля по базам РСА, ГИБДД, ФССП, НБКИ. Полная история владения.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon">🔧</div>
+        <h3 class="adv-card__title">Техническая диагностика</h3>
+        <p class="adv-card__text">150-точечная проверка кузова, двигателя, ходовой части и электроники перед продажей.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon">🛃</div>
+        <h3 class="adv-card__title">Растаможка включена</h3>
+        <p class="adv-card__text">Цена на сайте уже включает все таможенные платежи — никаких доплат при получении автомобиля.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon">🔄</div>
+        <h3 class="adv-card__title">Trade-in</h3>
+        <p class="adv-card__text">Выкупим ваш автомобиль по рыночной цене или засчитаем в счёт нового за 1 час.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon">📋</div>
+        <h3 class="adv-card__title">Гарантия</h3>
+        <p class="adv-card__text">Гарантийный сертификат на 6 месяцев или 15 000 км на все автомобили.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon">🚗</div>
+        <h3 class="adv-card__title">Помощь с регистрацией</h3>
+        <p class="adv-card__text">Оформим всё — от договора купли-продажи до постановки на учёт в ГИБДД.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS SLIDER ===== -->
+<section class="reviews-section">
+  <div class="container">
+    <h2 class="section-title">Отзывы клиентов</h2>
+    <div class="reviews-slider">
+      <button class="slider__arrow slider__arrow--prev" id="reviewPrev">&#8592;</button>
+      <div class="reviews-track-wrap">
+        <div class="reviews-track" id="reviewsTrack">
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p class="review-card__text">«Купил BMW X5 три месяца назад. Всё как обещали — чистая история, идеальное состояние. Отдельное спасибо менеджеру Алексею за помощь с оформлением!»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">М</div>
+              <div><div class="review-card__name">Михаил К.</div><div class="review-card__date">Март 2024</div></div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p class="review-card__text">«Обменяла свою Toyota на Mercedes по программе trade-in. Всё оценили честно, доплата минимальная. Уже езжу на новом авто!»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">E</div>
+              <div><div class="review-card__name">Елена В.</div><div class="review-card__date">Февраль 2024</div></div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p class="review-card__text">«Выбирал машину долго, объездил несколько салонов. АВТОМИР выделился честностью и прозрачностью. Никакого давления, только факты.»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">А</div>
+              <div><div class="review-card__name">Андрей П.</div><div class="review-card__date">Январь 2024</div></div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★☆</div>
+            <p class="review-card__text">«Отличный сервис. Машину из Китая привезли быстро, растаможка уже была включена в цену — никаких сюрпризов. Ждал немного дольше обещанного, но результат того стоил.»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">С</div>
+              <div><div class="review-card__name">Сергей Н.</div><div class="review-card__date">Декабрь 2023</div></div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p class="review-card__text">«Купил Porsche Cayenne. Всю документацию проверили вместе, ничего не скрывали. Гарантия 6 месяцев — это реально работает, проверил!»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">Д</div>
+              <div><div class="review-card__name">Дмитрий Л.</div><div class="review-card__date">Ноябрь 2023</div></div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-card__stars">★★★★★</div>
+            <p class="review-card__text">«Уже второй автомобиль покупаю здесь. Цены честные, сотрудники знают свою работу. Рекомендую всем знакомым!»</p>
+            <div class="review-card__author">
+              <div class="review-card__avatar">О</div>
+              <div><div class="review-card__name">Ольга С.</div><div class="review-card__date">Октябрь 2023</div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button class="slider__arrow slider__arrow--next" id="reviewNext">&#8594;</button>
+    </div>
+    <div class="slider__dots" id="reviewDots"></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container cta-section__inner">
+    <div>
+      <h2 class="section-title" style="padding-bottom:0">Готовы найти свой автомобиль?</h2>
+      <p style="color:var(--text-muted);margin-top:8px">Свяжитесь с нами — подберём лучший вариант под ваш бюджет</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="/" class="btn btn--accent">Смотреть каталог</a>
+      <button class="btn btn--outline" onclick="openModal('contactModal')">Оставить заявку</button>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>initReviewsSlider();</script>
+{% endblock %}

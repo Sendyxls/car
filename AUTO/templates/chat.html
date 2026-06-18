@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Чат с менеджером — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Чат с менеджером</div>
+    <h1 class="page-hero__title">Чат с менеджером</h1>
+    <p class="page-hero__sub">Задайте вопрос — мы ответим в ближайшее время. Также доступны
+      <a href="https://t.me/Sendyxls" target="_blank" style="color:var(--accent)">Telegram</a> и
+      <a href="https://wa.me/74951234567" target="_blank" style="color:var(--accent)">WhatsApp</a>.
+    </p>
+  </div>
+</div>
+
+<section class="chat-section">
+  <div class="container">
+    <div class="chat-window">
+      <div class="chat-car-context" id="chatCarContext" style="display:none"></div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="spinner"></div>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <input type="text" class="form__input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off"/>
+        <button type="submit" class="btn btn--accent">Отправить</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>initChatPage();</script>
+{% endblock %}

@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% block title %}Админ-панель — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Админ-панель</div>
+    <h1 class="page-hero__title">Админ-панель</h1>
+    <p class="page-hero__sub">Управление сайтом АВТОМИР</p>
+  </div>
+</div>
+
+<section class="admin-section">
+  <div class="container admin-section__inner">
+
+    <nav class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="stats">Статистика</button>
+      <button class="admin-tab" data-tab="clients">Клиенты</button>
+      <button class="admin-tab" data-tab="listings">Объявления</button>
+      <button class="admin-tab" data-tab="content">Контент</button>
+      <button class="admin-tab" data-tab="customs">Калькулятор</button>
+      <button class="admin-tab" data-tab="archive">Архив</button>
+      <button class="admin-tab" data-tab="chat">Чат с клиентами</button>
+    </nav>
+
+    <div class="admin-panel">
+
+      <!-- ===== STATS ===== -->
+      <div class="admin-tabpanel active" id="tab-stats">
+        <div id="statsBox" class="admin-stats-grid">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- ===== CLIENTS ===== -->
+      <div class="admin-tabpanel" id="tab-clients">
+        <div class="admin-toolbar">
+          <input type="text" class="form__input" id="clientsSearch" placeholder="Поиск по email, имени, телефону..."/>
+          <button class="btn btn--outline" id="clientsSearchBtn">Найти</button>
+        </div>
+        <div id="clientsList"><div class="spinner"></div></div>
+        <div id="clientsPagination" class="admin-pagination"></div>
+
+        <div class="admin-detail" id="clientDetail" style="display:none">
+          <button class="btn btn--outline" id="clientDetailBack">← Назад к списку</button>
+          <div id="clientDetailBody"></div>
+        </div>
+      </div>
+
+      <!-- ===== LISTINGS ===== -->
+      <div class="admin-tabpanel" id="tab-listings">
+        <div class="admin-toolbar">
+          <input type="text" class="form__input" id="listingsSearch" placeholder="Поиск по марке/модели..."/>
+          <button class="btn btn--outline" id="listingsSearchBtn">Найти</button>
+          <button class="btn btn--accent" id="listingAddBtn">+ Добавить объявление</button>
+        </div>
+        <div id="listingsList"><div class="spinner"></div></div>
+
+        <div class="admin-detail" id="listingForm" style="display:none">
+          <h3 class="section-title" id="listingFormTitle">Новое объявление</h3>
+          <form id="carForm" class="modal__form">
+            <input type="hidden" id="carId"/>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Марка</label>
+                <select class="form__input" id="carBrand"></select>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Новая марка (если нет в списке)</label>
+                <input type="text" class="form__input" id="carNewBrand" placeholder="Название марки"/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Происхождение новой марки</label>
+                <select class="form__input" id="carNewBrandOrigin">
+                  <option value="CN">Китай</option>
+                  <option value="DE">Германия</option>
+                  <option value="JP">Япония</option>
+                  <option value="GB">Великобритания</option>
+                  <option value="OTHER">Другое</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Модель</label>
+                <select class="form__input" id="carModel"></select>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Новая модель (если нет в списке)</label>
+                <input type="text" class="form__input" id="carNewModel" placeholder="Название модели"/>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Год</label>
+                <input type="number" class="form__input" id="carYear" required/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Цена без растаможки (₽)</label>
+                <input type="number" class="form__input" id="carPriceBase" required/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Пробег (км)</label>
+                <input type="number" class="form__input" id="carMileage" required/>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Объём двигателя (см³)</label>
+                <input type="number" class="form__input" id="carVolume" required/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Мощность (л.с.)</label>
+                <input type="number" class="form__input" id="carHp" required/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Топливо</label>
+                <select class="form__input" id="carFuel">
+                  <option>Бензин</option>
+                  <option>Дизель</option>
+                  <option>Гибрид</option>
+                  <option>Электро</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Коробка передач</label>
+                <input type="text" class="form__input" id="carTransmission" placeholder="АКПП"/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Цвет</label>
+                <input type="text" class="form__input" id="carColor"/>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Бейдж (необязательно)</label>
+                <input type="text" class="form__input" id="carBadge" placeholder="Хит продаж"/>
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label">Фото (URL или загрузка файла)</label>
+              <input type="text" class="form__input" id="carPhoto" placeholder="https://..."/>
+              <input type="file" id="carPhotoFile" accept="image/*" style="margin-top:8px"/>
+              <div id="carPhotoUploadMsg" style="display:none;margin-top:6px;font-size:13px"></div>
+              <img id="carPhotoPreview" src="" alt="" style="display:none;max-width:200px;max-height:120px;margin-top:8px;border-radius:6px;border:1px solid var(--card-border)"/>
+            </div>
+            <div class="form__group">
+              <label class="form__label">Описание</label>
+              <textarea class="form__input" id="carDescription" rows="3"></textarea>
+            </div>
+            <div class="form__group">
+              <label class="form__label"><input type="checkbox" id="carSpecial"/> Спецпредложение</label>
+            </div>
+            <div class="form-msg" id="carFormMsg" style="display:none"></div>
+            <p class="muted" id="carPriceRubPreview"></p>
+            <div class="admin-detail__actions">
+              <button type="submit" class="btn btn--accent">Сохранить</button>
+              <button type="button" class="btn btn--outline" id="listingFormCancel">Отмена</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT ===== -->
+      <div class="admin-tabpanel" id="tab-content">
+        <p class="muted">Тексты сайта. Оставьте поле пустым, чтобы вернуть значение по умолчанию.</p>
+        <div id="contentList"><div class="spinner"></div></div>
+        <div class="admin-detail__actions">
+          <button class="btn btn--accent" id="contentSaveBtn">Сохранить изменения</button>
+        </div>
+        <div class="form-msg" id="contentMsg" style="display:none"></div>
+      </div>
+
+      <!-- ===== CUSTOMS ===== -->
+      <div class="admin-tabpanel" id="tab-customs">
+        <p class="muted">Параметры расчёта таможенных платежей (используются при сохранении объявлений и в информационном калькуляторе на сайте).</p>
+        <div id="customsForm"><div class="spinner"></div></div>
+        <div class="admin-detail__actions">
+          <button class="btn btn--accent" id="customsSaveBtn">Сохранить параметры</button>
+          <button class="btn btn--outline" id="customsResetBtn">Сбросить к значениям по умолчанию</button>
+        </div>
+        <div class="form-msg" id="customsMsg" style="display:none"></div>
+      </div>
+
+      <!-- ===== ARCHIVE ===== -->
+      <div class="admin-tabpanel" id="tab-archive">
+        <div class="admin-toolbar">
+          <input type="text" class="form__input" id="archiveSearch" placeholder="Поиск по имени, телефону, тексту сообщения..."/>
+          <button class="btn btn--outline" id="archiveSearchBtn">Найти</button>
+        </div>
+        <h3 class="section-title">Заявки</h3>
+        <div id="archiveInquiries"><div class="spinner"></div></div>
+        <h3 class="section-title">Сообщения в чате</h3>
+        <div id="archiveMessages"></div>
+      </div>
+
+      <!-- ===== CHAT ===== -->
+      <div class="admin-tabpanel" id="tab-chat">
+        <div class="admin-chat-layout">
+          <div class="admin-chat-users" id="chatUsersList"><div class="spinner"></div></div>
+          <div class="admin-chat-window" id="chatWindow">
+            <p class="muted">Выберите клиента слева, чтобы открыть переписку.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/admin.js"></script>
+<script>initAdminPage();</script>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %}АВТОМИР — Каталог автомобилей с пробегом{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__overlay"></div>
+  <div class="container hero__content">
+    <p class="hero__sub">{{ cms('hero_sub', 'Более 200 автомобилей в наличии') }}</p>
+    <h1 class="hero__title">Автомобили<br/><span class="accent">с пробегом</span></h1>
+    <p class="hero__desc">{{ cms('hero_desc', 'Проверенные автомобили из Китая и Европы. Цена уже включает растаможку. Выкуп вашего авто.') }}</p>
+    <div class="hero__actions">
+      <a href="#catalog" class="btn btn--accent">Смотреть каталог</a>
+      <button class="btn btn--outline" onclick="openModal('contactModal')">Получить консультацию</button>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat"><span class="hero__stat-num">200+</span><span class="hero__stat-label">авто в наличии</span></div>
+      <div class="hero__stat"><span class="hero__stat-num">5 лет</span><span class="hero__stat-label">на рынке</span></div>
+      <div class="hero__stat"><span class="hero__stat-num">98%</span><span class="hero__stat-label">довольных клиентов</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FILTER ===== -->
+<section class="filter-section" id="catalog">
+  <div class="container">
+    <h2 class="section-title">Каталог автомобилей</h2>
+    <div class="filter">
+      <div class="filter__row">
+        <div class="filter__group">
+          <label class="filter__label">Марка</label>
+          <select class="filter__select" id="filterBrand">
+            <option value="">Все марки</option>
+          </select>
+        </div>
+        <div class="filter__group">
+          <label class="filter__label">Модель</label>
+          <select class="filter__select" id="filterModel">
+            <option value="">Все модели</option>
+          </select>
+        </div>
+        <div class="filter__group">
+          <label class="filter__label">Год от</label>
+          <select class="filter__select" id="filterYear">
+            <option value="">Любой год</option>
+            <option>2020</option><option>2021</option><option>2022</option>
+            <option>2023</option><option>2024</option>
+          </select>
+        </div>
+        <div class="filter__group">
+          <label class="filter__label">Цена до</label>
+          <select class="filter__select" id="filterPrice">
+            <option value="">Любая цена</option>
+            <option value="3000000">до 3 000 000 ₽</option>
+            <option value="5000000">до 5 000 000 ₽</option>
+            <option value="8000000">до 8 000 000 ₽</option>
+            <option value="15000000">до 15 000 000 ₽</option>
+          </select>
+        </div>
+        <div class="filter__group">
+          <label class="filter__label">Двигатель</label>
+          <select class="filter__select" id="filterFuel">
+            <option value="">Любой</option>
+            <option>Бензин</option><option>Дизель</option>
+            <option>Гибрид</option><option>Электро</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter__actions">
+        <button class="btn btn--accent filter__btn" id="filterBtn">Показать автомобили</button>
+        <button class="btn btn--outline" id="filterReset">Сбросить</button>
+        <label class="filter__checkbox">
+          <input type="checkbox" id="filterChinaOnly"/>
+          <span>Только Китай 🇨🇳</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<section class="catalog">
+  <div class="container">
+    <div class="catalog__count" id="catalogCount" style="display:none">
+      Найдено: <span id="countNum">0</span> автомобилей
+    </div>
+    <div class="catalog__grid" id="catalogGrid">
+      <div class="catalog__loading">
+        <div class="spinner"></div>
+        <p>Загрузка автомобилей...</p>
+      </div>
+    </div>
+    <div class="catalog__empty" id="catalogEmpty" style="display:none">
+      <p>Автомобили по вашему запросу не найдены.<br/>Попробуйте изменить параметры поиска.</p>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<!-- ===== SPECIAL OFFERS SLIDER ===== -->
+<section class="special" id="special">
+  <div class="container">
+    <h2 class="section-title">Спецпредложения</h2>
+    <p class="section-sub">Лучшие предложения этой недели</p>
+    <div class="slider">
+      <button class="slider__arrow slider__arrow--prev" id="sliderPrev" aria-label="Назад">&#8592;</button>
+      <div class="slider__track-wrap">
+        <div class="slider__track" id="sliderTrack"></div>
+      </div>
+      <button class="slider__arrow slider__arrow--next" id="sliderNext" aria-label="Вперед">&#8594;</button>
+    </div>
+    <div class="slider__dots" id="sliderDots"></div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>initIndexPage();</script>
+{% endblock %}

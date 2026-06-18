@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Автомобиль — АВТОМИР</title>
+  <link rel="icon" type="image/png" href="images/Иконка (белая).png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .detail-page { padding: calc(var(--header-h) + 48px) 0 80px; }
+    .detail-breadcrumb { font-size:13px; color:var(--text-muted); margin-bottom:32px; }
+    .detail-breadcrumb a { color:var(--accent); }
+    .detail-breadcrumb a:hover { text-decoration:underline; }
+    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+    .detail-img-wrap { position:relative; border-radius:10px; overflow:hidden; border:1px solid var(--card-border); }
+    .detail-img-wrap img { width:100%; display:block; }
+    .detail-specs { display:grid; grid-template-columns:1fr 1fr; gap:0; margin:20px 0; border:1px solid var(--card-border); border-radius:8px; overflow:hidden; }
+    .detail-spec { display:flex; flex-direction:column; gap:4px; padding:14px 16px; border-bottom:1px solid var(--card-border); border-right:1px solid var(--card-border); }
+    .detail-spec:nth-child(even) { border-right:none; }
+    .detail-spec:nth-last-child(-n+2) { border-bottom:none; }
+    .detail-spec__label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); }
+    .detail-spec span:last-child { font-size:15px; font-weight:500; }
+    @media (max-width:768px) { .detail-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo">
+      <img src="images/Логотип АВТОМИР (прозрачный-белый).png" alt="АВТОМИР" class="logo__img" />
+    </a>
+    <nav class="nav" id="nav">
+      <a href="index.html#catalog" class="nav__link">Каталог</a>
+      <a href="index.html#special" class="nav__link">Спецпредложения</a>
+      <a href="index.html#about" class="nav__link">О нас</a>
+      <a href="index.html#contacts" class="nav__link">Контакты</a>
+    </nav>
+    <button class="btn btn--accent header__cta" onclick="openModal('contactModal')">Связаться</button>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main class="detail-page">
+  <div class="container">
+    <div class="detail-breadcrumb">
+      <a href="index.html">Главная</a> / <a href="index.html#catalog">Каталог</a> / <span id="breadcrumbName">Автомобиль</span>
+    </div>
+    <div id="carDetail"></div>
+    <div style="margin-top:48px;">
+      <a href="index.html#catalog" class="btn btn--outline">← Вернуться к каталогу</a>
+    </div>
+  </div>
+</main>
+
+<!-- ===== MODAL: CONTACT ===== -->
+<div class="modal-overlay" id="contactModal" onclick="closeModalOutside(event, 'contactModal')">
+  <div class="modal">
+    <button class="modal__close" onclick="closeModal('contactModal')">&times;</button>
+    <h3 class="modal__title">Оставить заявку</h3>
+    <p class="modal__sub">Мы перезвоним вам в течение 15 минут</p>
+    <form class="modal__form" id="contactForm" onsubmit="submitForm(event, 'contactForm', 'contactModal')">
+      <div class="form__group">
+        <label class="form__label">Ваше имя *</label>
+        <input type="text" class="form__input" id="contactName" placeholder="Иван Иванов" required />
+      </div>
+      <div class="form__group">
+        <label class="form__label">Телефон *</label>
+        <input type="tel" class="form__input" id="contactPhone" placeholder="+7 (___) ___-__-__" required />
+      </div>
+      <button type="submit" class="btn btn--accent btn--full">Отправить заявку</button>
+      <p class="form__agree">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MODAL: CREDIT ===== -->
+<div class="modal-overlay" id="creditModal" onclick="closeModalOutside(event, 'creditModal')">
+  <div class="modal modal--wide">
+    <button class="modal__close" onclick="closeModal('creditModal')">&times;</button>
+    <h3 class="modal__title">Расчёт кредита</h3>
+    <div class="credit-car" id="creditCarInfo"></div>
+    <div class="credit-calc">
+      <div class="form__group">
+        <label class="form__label">Стоимость авто</label>
+        <input type="text" class="form__input" id="creditPrice" readonly />
+      </div>
+      <div class="form__group">
+        <label class="form__label">Первоначальный взнос: <span id="downPaymentVal">20</span>%</label>
+        <input type="range" class="form__range" id="downPayment" min="10" max="80" value="20" oninput="recalcCredit()" />
+      </div>
+      <div class="form__group">
+        <label class="form__label">Срок кредита: <span id="termVal">36</span> мес.</label>
+        <input type="range" class="form__range" id="creditTerm" min="12" max="84" step="12" value="36" oninput="recalcCredit()" />
+      </div>
+      <div class="credit-result">
+        <div class="credit-result__item">
+          <span class="credit-result__label">Ежемесячный платёж</span>
+          <span class="credit-result__value accent" id="monthlyPayment">—</span>
+        </div>
+        <div class="credit-result__item">
+          <span class="credit-result__label">Первый взнос</span>
+          <span class="credit-result__value" id="downPaymentSum">—</span>
+        </div>
+        <div class="credit-result__item">
+          <span class="credit-result__label">Сумма кредита</span>
+          <span class="credit-result__value" id="loanSum">—</span>
+        </div>
+      </div>
+    </div>
+    <form class="modal__form" id="creditForm" onsubmit="submitForm(event, 'creditForm', 'creditModal')">
+      <div class="form__row">
+        <div class="form__group">
+          <label class="form__label">Имя *</label>
+          <input type="text" class="form__input" id="creditName" placeholder="Иван Иванов" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label">Телефон *</label>
+          <input type="tel" class="form__input" id="creditPhone" placeholder="+7 (___) ___-__-__" required />
+        </div>
+      </div>
+      <button type="submit" class="btn btn--accent btn--full">Узнать условия кредита</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MODAL: SUCCESS ===== -->
+<div class="modal-overlay" id="successModal" onclick="closeModalOutside(event, 'successModal')">
+  <div class="modal modal--sm">
+    <button class="modal__close" onclick="closeModal('successModal')">&times;</button>
+    <div class="success-icon">✓</div>
+    <h3 class="modal__title">Заявка отправлена!</h3>
+    <p class="modal__sub">Наш менеджер свяжется с вами в ближайшее время.</p>
+    <button class="btn btn--accent btn--full" onclick="closeModal('successModal')">Закрыть</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__logo">
+      <img src="images/Логотип АВТОМИР (прозрачный-белый).png" alt="АВТОМИР" class="logo__img logo__img--sm" />
+    </div>
+    <div class="footer__links">
+      <a href="index.html#catalog" class="footer__link">Каталог</a>
+      <a href="index.html#special" class="footer__link">Спецпредложения</a>
+      <a href="index.html#about" class="footer__link">О нас</a>
+      <a href="index.html#contacts" class="footer__link">Контакты</a>
+    </div>
+    <div class="footer__copy">© 2024 АВТОМИР. Все права защищены.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+    const car = CARS_DB.find(c => c.id === id);
+    if (car) {
+      document.getElementById('breadcrumbName').textContent = `${car.brand} ${car.model} ${car.year}`;
+    }
+    ['contactPhone','creditPhone'].forEach(i => initPhoneMask(document.getElementById(i)));
+  });
+</script>
+</body>
+</html>
