@@ -1443,8 +1443,10 @@ def admin_chat_conversation(uid):
 
 # ─── Run ───────────────────────────────────────────────────────────────────
 
+# Инициализация БД запускается всегда — и через Gunicorn (Railway), и локально
+init_db()
+migrate_db()
+
 if __name__ == '__main__':
-    init_db()
-    migrate_db()
     print("✓ Сервер запущен: http://localhost:5000")
     app.run(host='0.0.0.0', port=5000, debug=False)
