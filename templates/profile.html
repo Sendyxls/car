@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Личный кабинет — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Профиль</div>
+    <h1 class="page-hero__title">Личный кабинет</h1>
+    <p class="page-hero__sub">{{ user.email if user else '' }}</p>
+  </div>
+</div>
+
+<section class="profile-section">
+  <div class="container profile-section__inner">
+
+    <div class="profile-card">
+      <h2 class="section-title">Контактные данные</h2>
+      <form class="modal__form" id="profileForm">
+        <div class="form__group">
+          <label class="form__label">Email</label>
+          <input type="email" class="form__input" id="profileEmail" disabled/>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label class="form__label">Имя</label>
+            <input type="text" class="form__input" id="profileName" placeholder="Иван Иванов"/>
+          </div>
+          <div class="form__group">
+            <label class="form__label">Телефон</label>
+            <input type="tel" class="form__input phone-mask" id="profilePhone" placeholder="+7 (___) ___-__-__"/>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Город</label>
+          <input type="text" class="form__input" id="profileCity" placeholder="Москва"/>
+        </div>
+        <div class="form-msg" id="profileMsg" style="display:none"></div>
+        <button type="submit" class="btn btn--accent btn--full">Сохранить</button>
+      </form>
+    </div>
+
+    <div class="profile-card">
+      <h2 class="section-title">Смена пароля</h2>
+      <form class="modal__form" id="passwordForm">
+        <div class="form__group">
+          <label class="form__label">Текущий пароль</label>
+          <input type="password" class="form__input" id="oldPassword" required/>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Новый пароль</label>
+          <input type="password" class="form__input" id="newPassword" required minlength="6"/>
+        </div>
+        <div class="form-msg" id="passwordMsg" style="display:none"></div>
+        <button type="submit" class="btn btn--outline btn--full">Изменить пароль</button>
+      </form>
+    </div>
+
+    <div class="profile-card profile-card--wide">
+      <h2 class="section-title">История заявок</h2>
+      <div id="inquiryHistory" class="history-list">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>initProfilePage();</script>
+{% endblock %}

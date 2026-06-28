@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Вход — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Вход</div>
+    <h1 class="page-hero__title">Вход в личный кабинет</h1>
+    <p class="page-hero__sub">Избранное, история заявок и чат с менеджером</p>
+  </div>
+</div>
+
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card">
+      <div class="form-msg form-msg--err" id="authError" style="display:none"></div>
+      <form class="modal__form" id="loginForm">
+        <div class="form__group">
+          <label class="form__label">Email *</label>
+          <input type="email" class="form__input" id="loginEmail" placeholder="you@example.com" required/>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Пароль *</label>
+          <input type="password" class="form__input" id="loginPassword" placeholder="••••••••" required minlength="6"/>
+        </div>
+        <button type="submit" class="btn btn--accent btn--full">Войти</button>
+      </form>
+      <p class="auth-card__alt">Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Автомобиль — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<section class="car-detail-page" id="carDetailPage">
+  <div class="container">
+    <div class="breadcrumb" id="carBreadcrumb">
+      <a href="/">Главная</a> / <a href="/">Каталог</a> / <span id="breadcrumbName">Загрузка...</span>
+    </div>
+
+    <!-- Loading state -->
+    <div id="carDetailLoading" style="padding:80px 0;text-align:center">
+      <div class="spinner"></div>
+      <p style="margin-top:16px;color:var(--text-muted)">Загрузка данных...</p>
+    </div>
+
+    <!-- Car content (filled by JS) -->
+    <div id="carDetailContent" style="display:none">
+      <div class="car-detail-grid">
+
+        <!-- LEFT: Photo -->
+        <div class="car-detail-photo">
+          <div class="car-detail-photo__main">
+            <img id="detailPhoto" src="" alt=""/>
+            <span id="detailBadge" class="car-card__badge" style="display:none"></span>
+            <button class="favorite-btn favorite-btn--lg" id="detailFavBtn" onclick="toggleFavorite(event, {{ car_id }})" aria-label="В избранное">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Info -->
+        <div class="car-detail-info">
+          <h1 class="car-detail-info__title" id="detailTitle">—</h1>
+
+          <div class="car-detail-info__price-block">
+            <div class="car-card__price" id="detailPrice">—</div>
+          </div>
+
+          <div class="car-detail-specs" id="detailSpecs"></div>
+
+          <p class="car-detail-info__desc" id="detailDesc"></p>
+
+          <div class="car-detail-info__actions">
+            <button class="btn btn--outline" id="detailCalcBtn">
+              🛃 Информация о растаможке
+            </button>
+            <button class="btn btn--accent" id="detailManagerBtn">
+              Связаться с менеджером
+            </button>
+            <button class="btn btn--outline" onclick="openModal('contactModal')">Оставить заявку</button>
+          </div>
+
+          <div class="car-detail-info__tel">
+            <a href="tel:+74951234567">📞 +7 (495) 123-45-67</a>
+            <span>Пн–Вс 9:00–21:00</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:40px">
+      <a href="/" class="btn btn--outline">← Вернуться к каталогу</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  initCarDetailPage({{ car_id }});
+</script>
+{% endblock %}

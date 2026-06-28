@@ -1,0 +1,43 @@
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+env/
+.venv/
+
+# Flask / SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Загруженные файлы (хранятся на Volume, не в репозитории)
+static/uploads/
+
+# Секреты и окружение
+.env
+*.env
+
+# Логи
+*.log
+out.log
+err.log
+
+# Временные файлы тестирования
+tmp_*.json
+test_*.png
+cookies.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

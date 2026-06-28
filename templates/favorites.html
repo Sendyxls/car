@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Избранное — АВТОМИР{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Главная</a> / Избранное</div>
+    <h1 class="page-hero__title">Избранное</h1>
+    <p class="page-hero__sub">
+      {% if user %}Автомобили, которые вы сохранили{% else %}Сохранено в этом браузере. <a href="/login" style="color:var(--accent)">Войдите</a>, чтобы не потерять список{% endif %}
+    </p>
+  </div>
+</div>
+
+<section class="catalog">
+  <div class="container">
+    <div class="catalog__grid" id="catalogGrid">
+      <div class="catalog__loading">
+        <div class="spinner"></div>
+        <p>Загрузка...</p>
+      </div>
+    </div>
+    <div class="catalog__empty" id="catalogEmpty" style="display:none">
+      <p>В избранном пока ничего нет.<br/>Добавляйте автомобили нажатием на ♥ в каталоге.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>initFavoritesPage();</script>
+{% endblock %}
